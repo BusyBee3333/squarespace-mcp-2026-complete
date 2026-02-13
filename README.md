@@ -1,226 +1,420 @@
-> **🚀 Don't want to self-host?** [Join the waitlist for our fully managed solution →](https://mcpengage.com/squarespace)
-> 
-> Zero setup. Zero maintenance. Just connect and automate.
+# Squarespace MCP Server
 
----
+A comprehensive Model Context Protocol (MCP) server for Squarespace, providing complete integration with the Squarespace platform for website management, e-commerce operations, content creation, and analytics.
 
-# 🚀 Squarespace MCP Server — 2026 Complete Version
+## Overview
 
-## 💡 What This Unlocks
+This MCP server enables AI assistants to interact with Squarespace sites through a rich set of **67 tools** covering all major platform features. Built with TypeScript and the official MCP SDK, it provides type-safe, reliable access to Squarespace's v1.0 API with OAuth2 authentication, automatic token refresh, pagination, error handling, and retry logic.
 
-**This MCP server gives AI direct access to your Squarespace Commerce and website platform.** Instead of manually managing products, orders, pages, and inventory through the Squarespace interface, you just *tell* the AI what you need — in plain English.
+## Features
 
-### 🎯 E-Commerce & Website Power Moves
+### 🛍️ Complete API Coverage (67 Tools)
 
-The AI can directly control your Squarespace site with natural language:
+#### Commerce - Orders (8 tools)
+- List, search, and filter orders by date range, status, email
+- Get detailed order information with line items and fulfillment
+- Create orders (for importing from external sources)
+- Fulfill orders with optional shipping notifications and tracking
+- Add internal notes to orders
+- Get pending orders and recent orders
 
-1. **Inventory Sync** — "Check inventory levels across all products and flag any with less than 5 units remaining"
-2. **Order Processing** — "Show me all pending orders from the last week and their fulfillment status"
-3. **Product Catalog** — "List all digital products and their current prices"
-4. **Content Management** — "Get all published pages and show me their last modified dates"
-5. **Stock Updates** — "Update inventory for product variant XYZ to 100 units and set it to unlimited stock"
+#### Commerce - Products (10 tools)
+- List all products with pagination
+- Get detailed product information with variants and images
+- Create new products with variants
+- Update products (name, description, pricing, SEO)
+- Delete products
+- Create, update, and delete product variants
+- Search products by name or tag
+- Filter products by tags
 
-### 🔗 The Real Power: Combining Tools
+#### Commerce - Inventory (5 tools)
+- Get inventory levels for variants
+- Update inventory quantities
+- Adjust inventory by relative amounts
+- Check for low stock items (configurable threshold)
+- List out-of-stock items
 
-AI can chain multiple Squarespace operations together in one conversation:
+#### Commerce - Transactions (3 tools)
+- Get all transactions for an order
+- Process refunds
+- Get transaction summaries (total paid, refunded, net)
 
-- Query low-stock products → Generate restock list → Update inventory levels
-- Pull order data → Match customer info → Export fulfillment queue
-- Analyze page content → Cross-reference products → Generate marketing content
-- List all orders → Filter by status → Create fulfillment workflow
+#### Profiles (7 tools)
+- List all profiles (customers, subscribers, donors)
+- Get detailed profile information
+- List customers with purchase history
+- List mailing list subscribers
+- List donors
+- Search profiles by email
+- Get top customers by lifetime value
 
-## 📦 What's Inside
+#### Webhooks (7 tools)
+- List all webhook subscriptions
+- Get webhook details
+- Create new webhooks for events (order.create, inventory.update, etc.)
+- Update webhook configurations
+- Delete webhooks
+- Send test notifications
+- Rotate webhook secrets for security
 
-**8 powerful API tools** covering Squarespace Commerce and website management:
-- `list_pages` — Browse website pages with pagination
-- `get_page` — Get specific page details and content
-- `list_products` — Query product catalog with filters
-- `get_product` — Get complete product details
-- `list_orders` — Browse orders with status filters
-- `get_order` — Get full order details
-- `list_inventory` — Check stock levels for all variants
-- `update_inventory` — Adjust product inventory levels
+#### Pages & Website (8 tools)
+- Get website information
+- List and get collections
+- List, get, create, update, and delete pages
+- Manage page SEO settings
 
-All with proper error handling, automatic authentication, and TypeScript types.
+#### Forms (5 tools)
+- List all forms
+- Get form details with fields
+- List form submissions with filtering
+- Get specific submission details
+- Export form submissions as CSV
 
-## 🚀 Quick Start
+#### Blog (9 tools)
+- List all blog collections
+- Get blog details
+- List blog posts with pagination
+- Get specific blog post
+- Create new blog posts
+- Update blog posts
+- Delete blog posts
+- Publish and unpublish posts
 
-### Option 1: Claude Desktop (Local)
+#### Analytics (5 tools)
+- Get revenue metrics (total revenue, order count, AOV)
+- Get top-selling products by revenue
+- Get daily sales breakdowns
+- Get monthly revenue summary
+- Get yearly revenue summary
 
-1. **Clone and build:**
-   ```bash
-   git clone https://github.com/BusyBee3333/Squarespace-MCP-2026-Complete.git
-   cd squarespace-mcp-2026-complete
-   npm install
-   npm run build
-   ```
+### 🎨 15 React MCP Apps (Dark Theme)
 
-2. **Get your Squarespace API key:**
-   - Log in to your Squarespace account
-   - Go to **Settings → Advanced → API Keys**
-   - Click **Generate Key** (requires Commerce Advanced plan or Developer mode)
-   - Copy your API key securely
+All apps are standalone Vite-based React applications with dark theme:
 
-3. **Configure Claude Desktop:**
-   
-   On macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   
-   On Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+1. **Orders Dashboard** - Order management and fulfillment
+2. **Products Manager** - Product catalog management
+3. **Inventory Tracker** - Real-time inventory monitoring
+4. **Customer Profiles** - Customer LTV and history
+5. **Analytics Dashboard** - Revenue and sales insights
+6. **Blog Editor** - Blog post management
+7. **Forms Viewer** - Form submissions and export
+8. **Webhook Manager** - Webhook configuration and testing
+9. **Page Manager** - Website page management
+10. **Bulk Editor** - Bulk product updates
+11. **SEO Optimizer** - SEO settings and optimization
+12. **Reports** - Generate and download reports
+13. **Shipping Manager** - Fulfillment tracking
+14. **Discount Manager** - Discount code management
+15. **Settings** - Server and API configuration
 
-   ```json
-   {
-     "mcpServers": {
-       "squarespace": {
-         "command": "node",
-         "args": ["/ABSOLUTE/PATH/TO/squarespace-mcp-2026-complete/dist/index.js"],
-         "env": {
-           "SQUARESPACE_API_KEY": "your-api-key-here"
-         }
-       }
-     }
-   }
-   ```
+### 🔒 Enterprise-Grade Features
 
-4. **Restart Claude Desktop**
+- **OAuth2 Authentication** - Full OAuth2 support with refresh tokens
+- **Automatic Token Refresh** - Seamless token renewal before expiration
+- **Retry Logic** - Automatic retry with exponential backoff for rate limits and errors
+- **Pagination Support** - Handle large datasets efficiently
+- **Error Handling** - Comprehensive error messages with details
+- **Type Safety** - Full TypeScript types for all API entities
+- **Rate Limit Management** - Built-in rate limit handling
 
-### Option 2: Deploy to Railway
-
-[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/squarespace-mcp)
-
-1. Click the button above
-2. Set your Squarespace API key in Railway dashboard
-3. Use the Railway URL as your MCP server endpoint
-
-### Option 3: Docker
+## Installation
 
 ```bash
-docker build -t squarespace-mcp .
-docker run -p 3000:3000 \
-  -e SQUARESPACE_API_KEY=your-key \
-  squarespace-mcp
+npm install @mcpengine/squarespace-server
 ```
 
-## 🔐 Authentication
-
-**Squarespace uses Bearer Token (OAuth2) authentication with API Keys.**
-
-**Setup Steps:**
-1. In Squarespace admin: **Settings → Advanced → API Keys**
-2. Click **Generate Key** (requires Commerce Advanced or Developer plan)
-3. Select scopes:
-   - **Website Content**: Read (for pages)
-   - **Commerce**: Read & Write (for products, orders, inventory)
-4. Copy and save your API key securely (shown only once!)
-
-**API Documentation:** https://developers.squarespace.com/commerce-apis
-
-**Note:** API access requires:
-- **Commerce Advanced plan** or higher
-- **Developer mode** enabled (for some features)
-
-The MCP server handles all API requests automatically using your API key.
-
-## 🎯 Example Prompts
-
-Once connected to Claude, you can use natural language for e-commerce and website operations:
-
-**Inventory Management:**
-- *"Show me all products with inventory below 10 units"*
-- *"Update inventory for variant ID abc123 to 75 units"*
-- *"List all products with unlimited inventory enabled"*
-
-**Order Management:**
-- *"Get all orders from the last 7 days"*
-- *"Show me pending orders that need fulfillment"*
-- *"Get complete details for order #12345 including line items"*
-
-**Product Catalog:**
-- *"List all physical products currently in the catalog"*
-- *"Show me digital products with prices over $50"*
-- *"Get product details for item SKU 'SUMMER-2024'"*
-
-**Website Content:**
-- *"List all published pages on the site"*
-- *"Get the content and metadata for the 'About' page"*
-- *"Show me pages modified in the last month"*
-
-**Combined Operations:**
-- *"Generate a report of all low-stock items and their current inventory"*
-- *"List orders from this week and show which products are most popular"*
-- *"Check all product variants and identify which need inventory updates"*
-
-## 🛠️ Development
-
-### Prerequisites
-- Node.js 18+
-- npm or yarn
-- Squarespace site with Commerce Advanced or Developer plan
-- API key with appropriate scopes
-
-### Setup
+Or install from source:
 
 ```bash
-git clone https://github.com/BusyBee3333/Squarespace-MCP-2026-Complete.git
-cd squarespace-mcp-2026-complete
+cd servers/squarespace
 npm install
-cp .env.example .env
-# Edit .env with your Squarespace API key
 npm run build
-npm start
 ```
 
-### Testing
+## Configuration
+
+### Environment Variables
+
+The server requires at minimum a Squarespace access token:
 
 ```bash
-npm test                  # Run all tests
-npm run test:watch        # Watch mode
-npm run test:coverage     # Coverage report
+export SQUARESPACE_ACCESS_TOKEN="your_access_token_here"
 ```
 
-## 🐛 Troubleshooting
+For long-term access with automatic token refresh:
 
-### "Authentication failed"
-- Verify your API key is correct (check for copy/paste errors)
-- Ensure your API key hasn't expired or been revoked
-- Confirm you have the **Commerce Advanced plan** or Developer mode enabled
+```bash
+export SQUARESPACE_ACCESS_TOKEN="your_access_token"
+export SQUARESPACE_REFRESH_TOKEN="your_refresh_token"
+export SQUARESPACE_CLIENT_ID="your_client_id"
+export SQUARESPACE_CLIENT_SECRET="your_client_secret"
+```
 
-### "Tools not appearing in Claude"
-- Restart Claude Desktop after updating config
-- Check that the path in `claude_desktop_config.json` is **absolute** (not relative)
-- Verify the build completed successfully (`dist/index.js` exists)
+### MCP Configuration
 
-### "403 Forbidden" errors
-- Check that your API key has the required scopes enabled
-- Some endpoints require specific plan levels (Commerce Advanced+)
-- Verify you're not hitting rate limits
+Add to your MCP settings file (`~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
-## 📖 Resources
+```json
+{
+  "mcpServers": {
+    "squarespace": {
+      "command": "squarespace-mcp",
+      "env": {
+        "SQUARESPACE_ACCESS_TOKEN": "your_access_token",
+        "SQUARESPACE_REFRESH_TOKEN": "your_refresh_token",
+        "SQUARESPACE_CLIENT_ID": "your_client_id",
+        "SQUARESPACE_CLIENT_SECRET": "your_client_secret"
+      }
+    }
+  }
+}
+```
 
-- [Squarespace Commerce API Documentation](https://developers.squarespace.com/commerce-apis)
-- [Squarespace API Reference](https://developers.squarespace.com/commerce-apis/reference)
+## Getting Squarespace API Credentials
+
+### 1. Register Your OAuth Application
+
+Submit a request to Squarespace to register your OAuth application:
+- [Squarespace Developer Portal](https://developers.squarespace.com/)
+- Provide: App name, icon, redirect URI, terms & privacy links
+
+You'll receive:
+- `client_id`
+- `client_secret`
+
+### 2. OAuth Flow
+
+Implement the OAuth2 authorization code flow:
+
+1. **Authorization URL:**
+```
+https://login.squarespace.com/api/1/login/oauth/provider/authorize?
+  client_id=YOUR_CLIENT_ID&
+  redirect_uri=YOUR_REDIRECT_URI&
+  scope=website.orders,website.products,website.inventory&
+  state=RANDOM_STATE&
+  access_type=offline
+```
+
+2. **Token Exchange:**
+```bash
+curl -X POST https://login.squarespace.com/api/1/login/oauth/provider/tokens \
+  -H "Authorization: Basic BASE64(client_id:client_secret)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "grant_type": "authorization_code",
+    "code": "AUTHORIZATION_CODE",
+    "redirect_uri": "YOUR_REDIRECT_URI"
+  }'
+```
+
+### API Scopes
+
+Request these scopes for full functionality:
+- `website.orders` - Read and manage orders
+- `website.orders.read` - Read-only order access
+- `website.products` - Manage products
+- `website.products.read` - Read-only product access
+- `website.inventory` - Manage inventory
+- `website.inventory.read` - Read-only inventory access
+- `website.transactions.read` - Read transaction data
+
+## Usage Examples
+
+### List Recent Orders
+
+```javascript
+{
+  "name": "squarespace_list_orders",
+  "arguments": {
+    "modifiedAfter": "2024-01-01T00:00:00Z",
+    "fulfillmentStatus": "PENDING"
+  }
+}
+```
+
+### Create a Product
+
+```javascript
+{
+  "name": "squarespace_create_product",
+  "arguments": {
+    "product": {
+      "type": "PHYSICAL",
+      "storePageId": "store_page_id",
+      "name": "New Product",
+      "description": "Product description",
+      "variants": [{
+        "sku": "SKU-001",
+        "pricing": {
+          "basePrice": {
+            "value": "29.99",
+            "currency": "USD"
+          }
+        },
+        "stock": {
+          "quantity": 100,
+          "unlimited": false
+        }
+      }]
+    }
+  }
+}
+```
+
+### Fulfill an Order
+
+```javascript
+{
+  "name": "squarespace_fulfill_order",
+  "arguments": {
+    "orderId": "order_id_here",
+    "shouldSendNotification": true,
+    "shipments": [{
+      "carrierName": "USPS",
+      "trackingNumber": "1234567890",
+      "trackingUrl": "https://tools.usps.com/go/TrackConfirmAction?tLabels=1234567890"
+    }]
+  }
+}
+```
+
+### Get Revenue Analytics
+
+```javascript
+{
+  "name": "squarespace_get_revenue_metrics",
+  "arguments": {
+    "startDate": "2024-01-01T00:00:00Z",
+    "endDate": "2024-01-31T23:59:59Z"
+  }
+}
+```
+
+### Check Low Stock Items
+
+```javascript
+{
+  "name": "squarespace_check_low_stock",
+  "arguments": {
+    "threshold": 10
+  }
+}
+```
+
+## Architecture
+
+```
+squarespace/
+├── src/
+│   ├── clients/
+│   │   └── squarespace.ts       # API client with auth & retry logic
+│   ├── types/
+│   │   └── index.ts             # Complete TypeScript types
+│   ├── tools/
+│   │   ├── commerce-orders.ts   # Order management tools
+│   │   ├── commerce-products.ts # Product management tools
+│   │   ├── commerce-inventory.ts# Inventory management tools
+│   │   ├── commerce-transactions.ts # Transaction tools
+│   │   ├── profiles.ts          # Customer/subscriber tools
+│   │   ├── webhooks.ts          # Webhook management tools
+│   │   ├── pages.ts             # Page management tools
+│   │   ├── forms.ts             # Form submission tools
+│   │   ├── blog.ts              # Blog management tools
+│   │   └── analytics.ts         # Analytics tools
+│   ├── ui/
+│   │   └── react-app/          # 15 React MCP apps
+│   ├── server.ts                # MCP server implementation
+│   └── main.ts                  # Entry point
+├── package.json
+├── tsconfig.json
+└── README.md
+```
+
+## API Reference
+
+Full documentation: [Squarespace Developer Docs](https://developers.squarespace.com/)
+
+### Rate Limits
+
+Squarespace enforces varying rate limits per endpoint with 1-minute cooldowns. The client automatically handles rate limiting with retry logic.
+
+### Webhooks
+
+Subscribe to real-time events:
+- `order.create` - New order created
+- `order.update` - Order updated
+- `transaction.create` - New transaction
+- `transaction.update` - Transaction updated
+- `inventory.update` - Inventory changed
+- `product.create` - Product created
+- `product.update` - Product updated
+- `product.delete` - Product deleted
+
+## Development
+
+### Build
+
+```bash
+npm run build
+```
+
+### Type Check
+
+```bash
+npm run type-check
+```
+
+### Development Mode
+
+```bash
+npm run dev
+```
+
+## Troubleshooting
+
+### Authentication Errors
+
+- **401 Unauthorized**: Token expired or invalid - refresh your token
+- **403 Forbidden**: Insufficient scopes - request additional permissions
+- **Token refresh fails**: Verify client credentials are correct
+
+### Rate Limiting
+
+- **429 Too Many Requests**: Built-in retry handles this automatically
+- Implement delays between bulk operations for best performance
+
+### Common Issues
+
+1. **Missing environment variables**: Ensure `SQUARESPACE_ACCESS_TOKEN` is set
+2. **TypeScript errors**: Run `npm run type-check` to diagnose
+3. **Module resolution**: Verify `package.json` has `"type": "module"`
+
+## Contributing
+
+Contributions welcome! Please:
+1. Follow existing code structure
+2. Add tests for new tools
+3. Update documentation
+4. Run type checking before submitting
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Support
+
+- [Squarespace API Documentation](https://developers.squarespace.com/)
 - [MCP Protocol Specification](https://modelcontextprotocol.io/)
-- [Claude Desktop Documentation](https://claude.ai/desktop)
+- [GitHub Issues](https://github.com/BusyBee3333/mcpengine/issues)
 
-## 🤝 Contributing
+## Changelog
 
-Contributions are welcome! Please:
-
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/amazing-tool`)
-3. Commit your changes (`git commit -m 'Add amazing tool'`)
-4. Push to the branch (`git push origin feature/amazing-tool`)
-5. Open a Pull Request
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details
-
-## 🙏 Credits
-
-Built by [MCPEngage](https://mcpengage.com) — AI infrastructure for business software.
-
-Want more MCP servers? Check out our [full catalog](https://mcpengage.com) covering 30+ business platforms.
-
----
-
-**Questions?** Open an issue or join our [Discord community](https://discord.gg/mcpengine).
+### v1.0.0 (2024-02-12)
+- Initial release
+- 67 tools covering all major Squarespace features
+- 15 React MCP apps with dark theme
+- OAuth2 authentication with auto-refresh
+- Comprehensive error handling and retry logic
+- Full TypeScript support
